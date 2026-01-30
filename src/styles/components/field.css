@@ -1,0 +1,26 @@
+.field {
+  position: relative;
+}
+
+.field__input {
+  --fieldInputPaddingX: 16px;
+  --fieldSeachInputIconSize: 16px;
+
+  width: 100%;
+  height: var(--input-height);
+  padding-inline: var(--fieldInputPaddingX);
+  background-color: transparent;
+  border: var(--border);
+  border-radius: var(--border-radius);
+
+  &:hover,
+  &:focus {
+    border-color: var(--color-dark-2);
+  }
+
+  &:focus {
+    background-color: var(--color-gray-1);
+    outline: none;
+  }
+
+}
