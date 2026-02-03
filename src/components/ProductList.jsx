@@ -4,12 +4,9 @@ const ProductList = (props) => {
   const {
     products,
     onClick,
-    isEmptyList = false,
   } = props;
 
-  if (!products) return null;
-
-  if (isEmptyList) {
+  if (!products || products.length === 0) {
     return (
       <div className="list__empty-message">
         Товара с таким названием не существует

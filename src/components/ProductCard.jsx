@@ -8,8 +8,8 @@ const ProductCard = (props) => {
 
   return (
     <div className="item__input" onClick={onClick}>
-      <img src={product.image} alt={product.title} />
-      <h3>{product.title}</h3>
+      <img src={product.image} alt={product.title || product.name} />
+      <h3>{product.title || product.name}</h3>
       <p>{`${product.price}₽`}</p>
     </div>
   );

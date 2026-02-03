@@ -1,18 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SearchForm from "./SearchForm";
 import SortingForm from "./SortingForm";
 import ProductList from "./ProductList";
 import Modal from "./Modal";
-import { fetchProducts } from "../services/api";
+import { useProducts } from "../hooks/useProducts";
 
 const List = () => {
-  const [products, setProducts] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
-  useEffect(() => {
-    fetchProducts().then((data) => setProducts(data));
-  }, []);
+  
+  const {
+    products,
+    searchQuery,
+    sortBy,
+    handleSearch,
+    handleSort,
+    handleReset,
+  } = useProducts();
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -24,30 +28,25 @@ const List = () => {
     setSelectedProduct(null);
   };
 
-  const searchProduct = (query) => {
-    console.log(`Поиск: ${query}`)
-  }
-
-  const filterProduct = (value) => {
-    console.log(`Фильтрация товаров ${value}`)
-  }
-
-  const resetButton = () => {
-    console.log(`Кнопка сброс`)
-  }
-
   const buyButtonProduct = () => {
-    console.log(`Кнопка купить modal`)
-  }
+    const isConfirmed = confirm('Товар добавлен в корзину');
+    if (isConfirmed) {
+      closeModal();
+    }
+  };
 
   return (
     <div className="list">
       <h1 className="list__title">Ecom.Tech</h1>
       <SearchForm
-        onSearchProduct={searchProduct}
-        onResetButton={resetButton}
+        onSearchProduct={handleSearch}
+        onResetButton={handleReset}
+        searchQuery={searchQuery}
       />
-      <SortingForm onfilterProduct={ filterProduct } />
+      <SortingForm 
+        onfilterProduct={handleSort}
+        sortBy={sortBy}
+      />
       <ProductList
         products={products}
         onClick={openModal}

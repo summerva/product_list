@@ -3,13 +3,19 @@
   flex-direction: column;
   row-gap: 24px;
   width: 100%;
-  max-width: 800px;
+  width: 800px;
   min-height: 400px;
   padding: 24px;
   background-color: var(--color-white);
   border: var(--border);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+
+  @media (max-width: 850px) {
+    width: 100%;
+    max-width: 800px;
+    min-width: unset;
+  }
 }
 
 .list__title {

@@ -1,7 +1,7 @@
 const Field = (props) => {
   const {
     label,
-    id,
+    value,
     error,
     onInput,
   } = props
@@ -18,6 +18,7 @@ const Field = (props) => {
             id="search-product"
             placeholder="Введите название"
             onInput={onInput}
+            value={value || ""}
           />
         </div>
     )
