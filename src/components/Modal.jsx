@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Button from "./Button";
 
 const Modal = (props) => {
@@ -5,7 +6,21 @@ const Modal = (props) => {
     product,
     onClose,
     onBuyButton,
-  } = props
+  } = props;
+
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscKey);
+    
+    return () => {
+      window.removeEventListener("keydown", handleEscKey);
+    };
+  }, [onClose]);
 
   if (!product) return null;
   
@@ -22,7 +37,7 @@ const Modal = (props) => {
           type="submit"
           onClick={onBuyButton}
         >
-        Купить
+          Купить
         </Button> 
       </div>
     </div>
